@@ -13,8 +13,8 @@
 </head>
 
 
-<body>  
-    <div class="container" ng-controller="MainController">
+<body ng-controller ="MainController as mc"> 
+    <div class="container" >
         <div class="row">
             <section class="view-selector">
                 <div class="panel panel-default">
@@ -37,7 +37,12 @@
                 <div class="col-sm-12" ng-controller="myQuestionController">
                     <div class="question-header">
                         <h2>My Question</h2>
-                        <h2 ng-bind="dummy"></h2>
+                        <!--<h2 ng-bind="dummy"></h2>-->
+                        <ul>
+                            <li ng-repeat="issue in myIssues track by $index">{{issue}}</li>
+                        </ul>
+                        <input type="text" name="input" ng-model="newIssues" placeholder = "Enter new issue">
+                        <button ng-click="addIssue()"> Add Issue</button>
                     </div>
                     <div class="question-list">
                           <ul>
@@ -52,7 +57,7 @@
                 <div class="col-sm-12" ng-controller="myResponsesController">
                     <div class="response-header">
                         <h2>My Responses</h2>
-                        <h2 ng-bind="dummy"></h2>
+                        <!--<h2 ng-bind="dummy"></h2>-->
                     </div>
                     <div class="responses-list">
 
@@ -62,7 +67,7 @@
             
         </div>
     </div>
-    
+    {{2+2}}
     {{mc.test}}
     
     <!--Angular-->

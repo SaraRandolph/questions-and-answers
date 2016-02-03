@@ -1,4 +1,5 @@
 app.controller('myQuestionController', function($scope){
+
     $scope.dummy = "dummy";
     $scope.myIssues = [];
     
@@ -29,8 +30,14 @@ app.controller('myQuestionController', function($scope){
 // }
 // 
 
+
    // if ($scope.newIssue) {
     //     $scope.QAservice.push($scope.newIssue);
     //     $scope.newissue = '';
     //     $scope.questionId++;
     // }
+
+//}
+
+//})
+

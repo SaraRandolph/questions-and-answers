@@ -1,30 +1,36 @@
 app.controller('myQuestionController', function($scope){
     $scope.dummy = "dummy";
+    $scope.myIssues = [];
     
     $scope.addIssue = function () {
-
-    if ($scope.newIssue) {
-        $scope.QAservice.push($scope.newIssue);
-        $scope.newissue = '';
-        $scope.questionId++;
+        $scope.myIssues.push($scope.newIssues);
+        $scope.newIssues = "";   
+ 
     }
-}
-issue: {
 
-}
+});
+// issue: {
 
-// function to add userName
-$scope.userName = []
+// }
 
-$scope.addUser = function () {
+// // function to add userName
+// $scope.userName = []
 
-    if ($scope.newUsername) {
-        $scope.todos.push($scope.newuserName);
-        $scope.newuserName = '';
-        $scope.questionId++;
-    }
-}
-userName: {
+// $scope.addUser = function () {
 
-}
-})
+//     if ($scope.newUsername) {
+//         $scope.todos.push($scope.newuserName);
+//         $scope.newuserName = '';
+//         $scope.questionId++;
+//     }
+// }
+// userName: {
+
+// }
+// 
+
+   // if ($scope.newIssue) {
+    //     $scope.QAservice.push($scope.newIssue);
+    //     $scope.newissue = '';
+    //     $scope.questionId++;
+    // }

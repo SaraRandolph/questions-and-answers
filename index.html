@@ -40,7 +40,11 @@
                         <h2 ng-bind="dummy"></h2>
                     </div>
                     <div class="question-list">
-
+                          <ul>
+                              <li ng-repeat = "issue in myIssues track by $index" >{{issue}}</li>
+                          </ul>
+                          <input type="text" name="input" ng-model="newIssues" placeholder = "Enter new issue">
+                          <button ng-click="addIssue()">Add Issue </button>  
                     </div>
                 </div>
             </section>

@@ -1,3 +1,10 @@
 app.controller('myQuestionController', function($scope){
-    $scope.dummy = "dummy";
+    $scope.myIssues = []
+    
+
+$scope.addIssue =function(){
+    $scope.issues.push($scope.newIssues);
+    $scope.newIssues = '';
+}   
+    
 })

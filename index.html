@@ -13,7 +13,51 @@
 </head>
 
 
-<body ng-controller="MainController as mc">
+<body>  
+    <div class="container" ng-controller="MainController">
+        <div class="row">
+            <section class="view-selector">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="btn-group" data-toggle="buttons"  > 
+                            <label class="btn btn-primary active" ng-click="setView('myQuestion')">
+                                <input type="radio" name="roster1"  > My Question
+                            </label>
+                            <label class="btn btn-primary" ng-click="setView('myResponses')">
+                                <input type="radio" name = "roster1" > My Responses
+                            </label>                         
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="question-container" ng-show="my_question">
+                <div class="col-sm-12" ng-controller="myQuestionController">
+                    <div class="question-header">
+                        <h2>My Question</h2>
+                        <h2 ng-bind="dummy"></h2>
+                    </div>
+                    <div class="question-list">
+
+                    </div>
+                </div>
+            </section>
+            <section class="responses-container" ng-show="!my_question">
+                <div class="col-sm-12" ng-controller="myResponsesController">
+                    <div class="response-header">
+                        <h2>My Responses</h2>
+                        <h2 ng-bind="dummy"></h2>
+                    </div>
+                    <div class="responses-list">
+
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </div>
     
     {{mc.test}}
     
@@ -30,6 +74,7 @@
     <!--Our Scripts-->
     <script src="app/app.js"></script>
     <script src="app/components/MainController.js"></script>
-    
+    <script src="app/components/myQuestionController.js"></script>    
+    <script src="app/components/myResponsesController.js"></script>    
 </body>
 </html>

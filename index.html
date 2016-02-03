@@ -14,9 +14,9 @@
 
 
 <body ng-controller ="MainController as mc"> 
-    <div class="container" >
+    <div class="container">
         <div class="row">
-            <section class="view-selector">
+            <!--<section class="view-selector">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Panel title</h3>
@@ -32,53 +32,60 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="question-container" ng-show="my_question">
-                <div class="col-sm-12" ng-controller="myQuestionController">
+            </section>-->
+            
+            
+            
+            <section class="question-container" ng-show="!activeQuestion">
+                <div class="col-sm-12">
                     <div class="question-header">
-                        <h2>My Question</h2>
-                        <!--<h2 ng-bind="dummy"></h2>-->
-                        <ul>
-                            <li ng-repeat="issue in myIssues track by $index">{{issue}}</li>
-                        </ul>
-                        <input type="text" name="input" ng-model="newIssues" placeholder = "Enter new issue">
-                        <button ng-click="addIssue()"> Add Issue</button>
+                        <h2>Questions</h2>
+  
                     </div>
                     <div class="question-list">
                           <ul>
-                              <li ng-repeat = "issue in myIssues track by $index" >{{issue}}</li>
+                              <li ng-repeat = "issue in myIssues track by $index" >
+                                  
+                                  {{issue}} <span ng-click="setActiveQuestion(issue)">GO TO QUESTION</span>
+                                  
+                                  </li>
                           </ul>
                           <input type="text" name="input" ng-model="newIssues" placeholder = "Enter new issue">
                           <button ng-click="addIssue()">Add Issue </button>  
                     </div>
                 </div>
             </section>
-            <section class="responses-container" ng-show="!my_question">
-                <div class="col-sm-12" ng-controller="myResponsesController">
+            
+            
+            <!--ACTIVE QUESTION VIEW-->
+            <section class="responses-container" ng-show="activeQuestion">
+                <div class="col-sm-12">
                     <div class="response-header">
-                        <h2>My Responses</h2>
+                        <h1 ng-click="activeQuestion = ''">GO BACK</h1>
+                        <h2>The Active Question is {{activeQuestion}}</h2>
                         <!--<h2 ng-bind="dummy"></h2>-->
                     </div>
                     <div class="responses-list">
-
+                        <ul>
+                            <li ng-repeat="response in activeQuestion.responses"></li>
+                        </ul>
                     </div>
                 </div>
             </section>
             
         </div>
     </div>
-    {{2+2}}
-    {{mc.test}}
+
     
     <!--Angular-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
     
     <!--JQuery-->
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     
     <!--Bootstrap-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     
     <!--Our Scripts-->
     <script src="app/app.js"></script>

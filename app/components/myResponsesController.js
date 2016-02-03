@@ -7,18 +7,44 @@ app.controller('myResponsesController', function ($scope) {
 
 // app.service('QAService', function (issue) {
 
-//     issue = [
-//         {
-//             type: "Question",
-//             UserName: "John",
-//             date: Date.now(),
-//             topic_a: "kind of Apples",
-//             question: "What kind of Apples do you like?",
-//             comment: "I hate meally red delicious apples and am looking for an alternative",
-//             votes: "",
-//             solution: "",
-//             questionId: 1,
-//         },
+
+
+/*     
+question = {
+    UserName: "John",
+    date: Date.now(),
+    topic_a: "kind of Apples",
+    question: "What kind of Apples do you like?",
+    comments: [{commentObj}],
+    responses: [{response}]
+    votes: "",
+    solutionIds: [2],
+    id: 324,
+}
+
+comment = {
+    UserName: "John",
+    date: Date.now(),
+    body: "comment body this is the text",
+    votes: "",
+    questionId: 324,
+    responseId: 2,
+    id: 1
+}
+
+response = {
+    UserName: "John",
+    date: Date.now(),
+    body: "answer here",
+    comments: [{commentObj}],
+    votes: "",
+    id: 2,
+    questionId: 324
+}
+
+
+
+
 //         {
 //             type: "Response",
 //             UserName: "Sara",
@@ -191,3 +217,4 @@ app.controller('myResponsesController', function ($scope) {
 // userName: {
 
 // }
+*/

@@ -11,7 +11,6 @@ app.controller('MainController', function($scope) {
     }
     
     $scope.setActiveQuestion = function(issue){
-        debugger
         $scope.activeQuestion = issue;
     }
     

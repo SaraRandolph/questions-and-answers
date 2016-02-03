@@ -93,6 +93,7 @@ app.controller('myResponsesController', function ($scope, []) {
 
 // function to add issue this belongs in myQuestionsController
    
+<<<<<<< HEAD
 // $scope.addIssue = function () {
 
 //     if ($scope.newIssue) {
@@ -119,3 +120,6 @@ app.controller('myResponsesController', function ($scope, []) {
 // userName: {
 
 // }
+=======
+
+>>>>>>> 19db268c699962a13d8e1b841103a6418c1dd83f

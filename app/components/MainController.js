@@ -8,7 +8,7 @@ app.controller('MainController', function($scope) {
 //     date: Date.now(),
 //     topic: "kind of Apples",
 //     tag: one word description;
-//     question: "What kind of Apples do you like?",
+//     question: "Long form question?",
 //     comments: [{commentObj}],
 //     responses: [{response}]
 //     votes: "",

@@ -9,6 +9,9 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
     crossorigin="anonymous">
+    
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!--Our Style-->
     <link rel="stylesheet" href="assets/styles/style.css">
@@ -23,19 +26,20 @@
                 <div class="col-sm-12">
                     <div>
                         <input type="text" ng-model="query" />
-                        <button ng-click="sortOrder = 'tag'">Sort by Tag</button>
-                        <button ng-click="sortOrder = 'userName'">Sort by User</button>
-                        <button ng-click="sortOrder = '-date'">Sort by Date</button>
+                        <button class="btn-group" role="group" ng-click="sortOrder = 'tag'">Sort by Tag</button>
+                        <button class="btn-group" role="group" ng-click="sortOrder = 'userName'">Sort by User</button>
+                        <button class="btn-group" role="group" ng-click="sortOrder = '-date'">Sort by Date</button>
                     </div>
                     <div class="question-header">
-                        <h2>Questions</h2>
+                        <h2 class= "fa">Questions</h2>
 
                     </div>
                     <div class="question-list">
                         <ul>
                             <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
-                                <button ng-click="upVote(question)"><span class="glyphicon-hand-up" aria-hidden="true"></span> up {{question.votes}}</button>
-                                <button ng-click="downVote(question)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down {{question.votes}}</button>
+                                <button ng-click="upVote(question)"><span class="glyphicon-hand-up" aria-hidden="true"></span>up</button>
+                                <button ng-click="downVote(question)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down </button>
+                                <p>Total Votes: {{question.votes}}</p> 
                                 <h3>{{question.questionSummary}}</h3>
                                 <p>{{question.tag}}</p>
                                 <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
@@ -67,17 +71,19 @@
                     <div class="responses-list">
                         <ul>
                             <li ng-repeat="response in activeQuestion.responses">
-                                <button ng-click="upVote(response)"><span class="glyphicon-hand-up" aria-hidden="true"></span> up {{response.votes}}</button>
-                                <button ng-click="downVote(response)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down {{response.votes}}</button>
+                                <button ng-click="upVote(response)"><span class="glyphicon-hand-up" aria-hidden="true"></span> up</button>
+                                <button ng-click="downVote(response)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down</button>
+                                <p>Total Votes: {{response.votes}}</p> 
                                 <p>{{response.body}}</p>
                              
                                
                                 <div class="comments-list">
                                     <ul>
                                         <li ng-repeat="comment in response.comments track by $index">
-                                            <
-                                        <button ng-click="upVote(comment)"><span class="glyphicon-hand-up aria-hidden="true"></span>up {{comment.votes}}</button>
-                                        <button ng-click="downVote(comment)"><span class="glyphicon-hand-down" aria-hidden="true"down></span> {{comment.votes}}</button>
+                                            
+                                        <button ng-click="upVote(comment)"><span class="glyphicon-hand-up aria-hidden="true"></span>up</button>
+                                        <button ng-click="downVote(comment)"><span class="glyphicon-hand-down" aria-hidden="true"down>down</span></button>
+                                        <p>Total Votes: {{comment.votes}}</p> 
                                         <p>{{comment.body}}</p> 
                                         </li>
                                         <!--<span ng-click="setActiveReponse(response)"></span></li>-->

@@ -41,15 +41,43 @@
             <section class="responses-container" ng-show="activeQuestion">
                 <div class="col-sm-12">
                     <div class="response-header">
-                        <h1 ng-click="activeQuestion = ''">GO BACK</h1>
+                        <h1 ng-click="goBack()">GO BACK</h1><!--activeQuestion=''-->
                         <h2>The Active Question is {{activeQuestion}}</h2>
                         <!--<h2 ng-bind="dummy"></h2>-->
                     </div>
                     <div class="responses-list">
                         <ul>
-                            <li ng-repeat="response in activeQuestion.responses"></li>
+                            <li ng-repeat="response in responses">{{response}}
+                            <span ng-click="setActiveResponse(response)">Add Comment</span></li>
                         </ul>
+                        <input type="text" name="input" ng-model="newResponse" placeholder = "Enter new response">
+                        <button ng-click="addResponse()">Add Response </button>                         
                     </div>
+ 
+                          <!--<input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
+                          <button ng-click="addComment()">Add Comment </button>  -->
+                    </div>                 
+                </div>
+            </section>
+            
+            <section class="comments-container" ng-show="activeResponse">
+                <div class="col-sm-12">
+                    <div class="comments-header">
+                        <!--<h1 ng-click="activeQuestion = ''">GO BACK</h1>
+                        <h2>The Active Question is {{activeQuestion}}</h2>-->
+                        <h2>The Active Response is {{activeResponse}}</h2>                        
+                        
+                        <!--<h2 ng-bind="dummy"></h2>-->
+                    </div>
+                    <div class="comments-list">
+                        <ul>
+                            <li ng-repeat="comment in comments track by $index">{{comment}} </li>
+                            <!--<span ng-click="setActiveReponse(response)"></span></li>-->
+                        </ul>
+ 
+                          <input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
+                          <button ng-click="addComment()">Add Comment </button>  
+                    </div>                   
                 </div>
             </section>
             

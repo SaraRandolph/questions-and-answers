@@ -35,7 +35,7 @@
                         <ul>
                             <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
                                 <button ng-click="upVote(question)"><span class="glyphicon-hand-up" aria-hidden="true"></span> up {{question.votes}}</button>
-                                <button ng-click="downVote(questione)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down {{question.votes}}</button>
+                                <button ng-click="downVote(question)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down {{question.votes}}</button>
                                 <h3>{{question.questionSummary}}</h3>
                                 <p>{{question.tag}}</p>
                                 <p>{{question.userName}} : {{question.date | date: 'short'}}</p>

@@ -1,10 +1,8 @@
 app.controller('MainController', function($scope) {
-    $scope.my_question = true;
-    $scope.myIssues = ["nutrition","cost","flavor"];
-    $scope.responses = ["oatmeal", "beans and rice", "whey powder"];
+
     $scope.comments = [];
 
-    var id = 0;
+    var id = 2367;
     
 //    question = {
 //     UserName: "John",
@@ -22,6 +20,7 @@ app.controller('MainController', function($scope) {
     
     $scope.addQuestion = function () {
         $scope.newQuestion.date = Date.now();
+        $scope.newQuestion.responses = [];
         $scope.newQuestion.id = id;
         id++;
         $scope.questionsArr.push($scope.newQuestion);
@@ -33,9 +32,10 @@ app.controller('MainController', function($scope) {
         
     }
     
-    $scope.addComment = function () {
-        $scope.comments.push($scope.newComment);
-        $scope.newComment = "";   
+    $scope.addComment = function (obj) {
+       obj.newComment.date = Date.now();
+        obj.comments.push(obj.newComment);
+        obj.newComment = "";   
  
     }   
     
@@ -49,12 +49,12 @@ app.controller('MainController', function($scope) {
         $scope.activeQuestion = question;
     }
     
-    $scope.setActiveResponse = function(response){
-        $scope.activeResponse = response;
-    }  
-    $scope.setActiveComment = function(comment){
-        $scope.activeComment = comment;
-    }    
+    // $scope.setActiveResponse = function(response){
+    //     $scope.activeResponse = response;
+    // }  
+    // $scope.setActiveComment = function(comment){
+    //     $scope.activeComment = comment;
+    // }    
     
     // $scope.setView = function(view) {
     //     if (view === 'myQuestion') {
@@ -65,8 +65,8 @@ app.controller('MainController', function($scope) {
     // }
     
     $scope.addResponse = function() {
- 
-        $scope.responses.push($scope.newResponse);
+        $scope.newResponse.comments = [];
+        $scope.activeQuestion.responses.push($scope.newResponse);
         $scope.newResponse = "";       
     }
 });

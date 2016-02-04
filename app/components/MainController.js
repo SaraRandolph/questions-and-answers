@@ -1,15 +1,36 @@
 app.controller('MainController', function($scope) {
     $scope.my_question = true;
-    
-    $scope.dummy = "dummy";
     $scope.myIssues = ["nutrition","cost","flavor"];
     $scope.responses = ["oatmeal", "beans and rice", "whey powder"];
     $scope.comments = [];
+
+    var id = 0;
     
-    $scope.addIssue = function () {
-        $scope.myIssues.push($scope.newIssues);
-        $scope.newIssues = "";   
- 
+//    question = {
+//     UserName: "John",
+//     date: Date.now(),
+//     topic: "kind of Apples",
+//     tag: one word description;
+//     question: "Long form question?",
+//     comments: [{commentObj}],
+//     responses: [{response}]
+//     votes: "",
+//     solutionIds: [2],
+//     id: 324,
+// }
+    $scope.questionsArr = [];
+    
+    $scope.addQuestion = function () {
+        $scope.newQuestion.date = Date.now();
+        $scope.newQuestion.id = id;
+        id++;
+        $scope.questionsArr.push($scope.newQuestion);
+        $scope.newQuestion = "";
+    }
+    $scope.removeQuestion = function (index) {
+        $scope.questionsArr.splice(index, 1)
+        
+        
     }
     
     $scope.addComment = function () {
@@ -23,8 +44,9 @@ app.controller('MainController', function($scope) {
         $scope.activeResponse = "";
     }
     
-    $scope.setActiveQuestion = function(issue){
-        $scope.activeQuestion = issue;
+ 
+    $scope.setActiveQuestion = function(question){
+        $scope.activeQuestion = question;
     }
     
     $scope.setActiveResponse = function(response){

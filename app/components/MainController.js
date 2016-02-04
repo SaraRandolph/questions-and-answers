@@ -23,6 +23,7 @@ app.controller('MainController', function($scope) {
         $scope.newQuestion.responses = [];
         $scope.newQuestion.id = id;
         id++;
+        $scope.newQuestion.votes = 0;
         $scope.questionsArr.push($scope.newQuestion);
         $scope.newQuestion = "";
     }
@@ -33,7 +34,8 @@ app.controller('MainController', function($scope) {
     }
     
     $scope.addComment = function (obj) {
-       obj.newComment.date = Date.now();
+        obj.newComment.date = Date.now();
+        obj.newComment.votes = 0;
         obj.comments.push(obj.newComment);
         obj.newComment = "";   
  
@@ -66,10 +68,23 @@ app.controller('MainController', function($scope) {
     
     $scope.addResponse = function() {
         $scope.newResponse.comments = [];
+        $scope.newResponse.votes = 0;
         $scope.activeQuestion.responses.push($scope.newResponse);
         $scope.newResponse = "";       
     }
+    $scope.upVote = function (obj) {
+        obj.votes++;
+    }
+
+    $scope.downVote = function (obj) {
+        obj.votes--;
+    }
 });
+
+
+// adds upvote and downvote functionality 
+
+
 
 // comment = {
 //     UserName: "John",

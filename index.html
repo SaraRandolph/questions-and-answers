@@ -34,7 +34,8 @@
                     <div class="question-list">
                         <ul>
                             <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
-
+                                <button ng-click="upVote(question)">up {{question.votes}}</button>
+                                <button ng-click="downVote(question)">down {{question.votes}}</button>
                                 <h3>{{question.questionSummary}}</h3>
                                 <p>{{question.tag}}</p>
                                 <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
@@ -65,7 +66,10 @@
                     </div>
                     <div class="responses-list">
                         <ul>
-                            <li ng-repeat="response in activeQuestion.responses">{{response.body}}
+                            <li ng-repeat="response in activeQuestion.responses">
+                                <button ng-click="upVote(response)">up {{response.votes}}</button>
+                                <button ng-click="downVote(response)">down {{response.votes}}</button>
+                                <p>{{response.body}}</p>
                                
                                 <div class="comments-list">
                                     <ul>

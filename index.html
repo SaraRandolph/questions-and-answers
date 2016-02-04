@@ -1,42 +1,65 @@
-<html ng-app = "Name">
+<html ng-app="Name">
+
 <head>
     <meta charset="UTF-8">
     <title>QuestionsAndAnswers</title>
-    
-    <!--Bootstrap-->   
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+    crossorigin="anonymous">
+
     <!--Our Style-->
     <link rel="stylesheet" href="assets/styles/style.css">
-    
+
 </head>
 
 
-<body ng-controller ="MainController as mc"> 
+<body ng-controller="MainController as mc">
     <div class="container">
         <div class="row">
             <section class="question-container" ng-show="!activeQuestion">
                 <div class="col-sm-12">
+                    <div>
+                        <input type="text" ng-model="query" />
+                        <button ng-click="sortOrder = 'tag'">Sort by Tag</button>
+                        <button ng-click="sortOrder = 'userName'">Sort by User</button>
+                        <button ng-click="sortOrder = '-date'">Sort by Date</button>
+                    </div>
                     <div class="question-header">
                         <h2>Questions</h2>
-  
+
                     </div>
                     <div class="question-list">
-                          <ul>
-                              <li ng-repeat = "issue in myIssues track by $index" >
-                                  
-                                  {{issue}} <span ng-click="setActiveQuestion(issue)">GO TO QUESTION</span>
-                                  
-                                  </li>
-                          </ul>
-                          <input type="text" name="input" ng-model="newIssues" placeholder = "Enter new issue">
-                          <button ng-click="addIssue()">Add Issue </button>  
+                        <ul>
+                            <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
+
+                                <h3>{{question.questionSummary}}</h3>
+                                <p>{{question.tag}}</p>
+                                <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
+                                <br>
+                                <button ng-click="setActiveQuestion(question)">GO TO QUESTION</buttonn>
+                                    <button ng-click="removeQuestion($index)">Remove YOUR QUESTION </button>
+                            </li>
+                        </ul>
+                        <input class="form-control" type="text" name="questionSummary" ng-model="newQuestion.questionSummary" style:="width: 300px"
+                        placeholder="Enter short description of your question">
+                        <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 100px" placeholder="Enter your User Name">
+                        <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 50px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
+                        <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.question" placeholder="Enter your Question (long version)"></textarea>
+                        <button ng-click="addQuestion()">Add Question </button>
+
+                        <!--<input type="date" ng-model="date" value="{{ date | date: 'yyyy-MM-dd' }}" />-->
+
+
+                        <!--<input class="form-control" type="date" ng-model="newIssues.Date" placeholder="Date Logged" />
+                          <button ng-click="date.now()">Add Date </button>   -->
                     </div>
-                </div>
+                </div>Question
             </section>
-            
-            
+
+
             <!--ACTIVE QUESTION VIEW-->
             <section class="responses-container" ng-show="activeQuestion">
                 <div class="col-sm-12">
@@ -52,25 +75,27 @@
                     </div>
                 </div>
             </section>
-            
+
         </div>
     </div>
 
-    
+
     <!--Angular-->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
-    
+
     <!--JQuery-->
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    
+
     <!--Bootstrap-->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
+
     <!--Our Scripts-->
     <script src="app/app.js"></script>
     <script src="app/components/MainController.js"></script>
-    <script src="app/components/myQuestionController.js"></script>    
-    <script src="app/components/myResponsesController.js"></script>    
+    <script src="app/components/myQuestionController.js"></script>
+    <script src="app/components/myResponsesController.js"></script>
 </body>
+
 </html>

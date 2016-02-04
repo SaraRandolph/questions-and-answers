@@ -1,6 +1,10 @@
 app.controller('MainController', function($scope) {
 
     $scope.comments = [];
+    
+    $scope.solution = {
+        value:false
+    }
 
     var id = 2367;
     
@@ -68,7 +72,11 @@ app.controller('MainController', function($scope) {
     
     $scope.addResponse = function() {
         $scope.newResponse.comments = [];
+
+        $scope.newResponse.solution 
+
         $scope.newResponse.votes = 0;
+
         $scope.activeQuestion.responses.push($scope.newResponse);
         $scope.newResponse = "";       
     }

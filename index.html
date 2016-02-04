@@ -70,6 +70,10 @@
                     </div>
                     <div class="responses-list">
                         <ul>
+
+                            <li ng-repeat="response in activeQuestion.responses">{{response.body}}
+                             <label><input type="checkbox" ng-model = "response.solution.value">Solution</label>  
+
                             <li ng-repeat="response in activeQuestion.responses">
                                 <button ng-click="upVote(response)"><span class="glyphicon-hand-up" aria-hidden="true"></span> up</button>
                                 <button ng-click="downVote(response)"><span class="glyphicon-hand-down" aria-hidden="true"></span>down</button>
@@ -77,6 +81,7 @@
                                 <p>{{response.body}}</p>
                              
                                
+
                                 <div class="comments-list">
                                     <ul>
                                         <li ng-repeat="comment in response.comments track by $index">
@@ -93,6 +98,7 @@
                                     <button ng-click="addComment(response)">Add Comment </button>
                                 </div>
                             </li>
+                            
                         </ul>
                         <input type="text" name="input" ng-model="newResponse.body" placeholder="Enter new response">
                         <button ng-click="addResponse()">Add Response </button>

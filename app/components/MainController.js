@@ -1,4 +1,42 @@
-app.controller('MainController', function($scope) {
+/* global Firebase */
+app.controller('MainController', function($scope, FBREF, $firebaseArray, $firebaseObject) {
+
+    var mc = this;
+    var db = new Firebase(FBREF);
+
+ $scope.questionsArr = $firebaseArray(new Firebase(FBREF + 'questions'));
+    $scope.member;
+
+function handleDBResponse (err, authData){
+        if(err){
+            console.log(err);
+            return;
+        } 
+        console.log(authData);
+        var userToSave = {
+            username: mc.user.email,
+            reputation: 0,
+            created: Date.now()
+        }
+        $scope.$apply(function(){
+            $scope.member = userToSave;
+        })
+   
+        db.child('users').child(authData.uid).update(userToSave);
+    }
+    
+    
+    $scope.register = function(){
+        db.createUser(mc.user, handleDBResponse);
+    }
+    
+    $scope.login = function(){
+      
+        console.log(mc.user)
+        
+        db.authWithPassword(mc.user, handleDBResponse)
+    }
+    
 
     $scope.comments = [];
     
@@ -20,7 +58,6 @@ app.controller('MainController', function($scope) {
 //     solutionIds: [2],
 //     id: 324,
 // }
-    $scope.questionsArr = [];
     
     $scope.addQuestion = function () {
         $scope.newQuestion.date = Date.now();
@@ -28,7 +65,7 @@ app.controller('MainController', function($scope) {
         $scope.newQuestion.id = id;
         id++;
         $scope.newQuestion.votes = 0;
-        $scope.questionsArr.push($scope.newQuestion);
+        $scope.questionsArr.$add($scope.newQuestion);
         $scope.newQuestion = "";
     }
     $scope.removeQuestion = function (index) {
@@ -40,7 +77,7 @@ app.controller('MainController', function($scope) {
     $scope.addComment = function (obj) {
         obj.newComment.date = Date.now();
         obj.newComment.votes = 0;
-        obj.comments.push(obj.newComment);
+        obj.comments.$add(obj.newComment);
         obj.newComment = "";   
  
     }   
@@ -52,23 +89,11 @@ app.controller('MainController', function($scope) {
     
  
     $scope.setActiveQuestion = function(question){
-        $scope.activeQuestion = question;
+
+        $scope.activeQuestion = $firebaseObject(new Firebase(FBREF + 'questions/' +question.$id));
+        $scope.activeQuestionResponses = $firebaseArray(new Firebase(FBREF + 'questions/' +question.$id + '/responses'))
+    
     }
-    
-    // $scope.setActiveResponse = function(response){
-    //     $scope.activeResponse = response;
-    // }  
-    // $scope.setActiveComment = function(comment){
-    //     $scope.activeComment = comment;
-    // }    
-    
-    // $scope.setView = function(view) {
-    //     if (view === 'myQuestion') {
-    //         this.my_question = true;
-    //     } else {
-    //         this.my_question = false;
-    //     }
-    // }
     
     $scope.addResponse = function() {
         $scope.newResponse.comments = [];
@@ -76,8 +101,8 @@ app.controller('MainController', function($scope) {
         $scope.newResponse.solution 
 
         $scope.newResponse.votes = 0;
-
-        $scope.activeQuestion.responses.push($scope.newResponse);
+        
+        $scope.activeQuestionResponses.$add($scope.newResponse);
         $scope.newResponse = "";       
     }
     $scope.upVote = function (obj) {
@@ -90,16 +115,10 @@ app.controller('MainController', function($scope) {
 });
 
 
-// adds upvote and downvote functionality 
 
 
 
-// comment = {
-//     UserName: "John",
-//     date: Date.now(),
-//     body: "comment body this is the text",
-//     votes: "",
-//     questionId: 324,
-//     responseId: 2,
-//     id: 1
-// }
+
+
+
+

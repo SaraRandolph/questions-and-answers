@@ -1,0 +1,51 @@
+<section class="question-container">
+    <div class="col-sm-12">
+        <div>
+            <input type="text" ng-model="query" />
+            <button class="btn-group btn btn-dark-blue" role="group" ng-click="sortOrder = 'tag'">Sort by Tag</button>
+            <button class="btn-group btn btn-dark-blue" role="group" ng-click="sortOrder = 'userName'">Sort by User</button>
+            <button class="btn-group btn btn-dark-blue" role="group" ng-click="sortOrder = '-date'">Sort by Date</button>
+        </div>
+        <div class="question-header">
+            <h2>Questions</h2>
+        </div>
+
+    <div class="container-fluid">  
+        <div class="row panel" ng-repeat="question in questionList | filter: query | orderBy: sortOrder track by $index">
+            <div class="col-sm-1 text-center icon-box">
+                <div ng-model="newVote" ng-click="upVote(question)" class="fa fa-thumbs-up fa-2x"></div>
+                <br>
+                <i class="fa fa-circle-o"></i>
+                <br>
+                <div ng-model="newVote"  ng-click="downVote(question)" class="fa fa-thumbs-down fa-2x"></div>
+                <p>Total Votes: {{question.votes}}</p>
+            </div>
+            
+            <div class="col-sm-10" class="panel panel-default" >
+                <div class="panel-heading panel-heading-custom">{{question.questionSummary}}</div>
+                <div class="panel-body">
+                    sumbitted by: {{question.userName}} : {{question.date | date: 'short'}}
+                    <a class="btn btn-salmon pull-right" ui-sref="viewQuestion({id: question.$id})">GO TO QUESTION</a>
+                </div>
+            </div>
+        </div>
+    </div>  
+        
+<!--            
+            <ul>
+                <li ng-repeat="question in questionList | filter: query | orderBy: sortOrder track by $index">
+                    <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
+                    <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
+                    <p>Total Votes: {{question.votes}}</p>
+                    <h3>{{question.questionSummary}}</h3>
+                    <p>{{question.tag}}</p>
+                    <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
+                    <br>
+                    <button ng-click="setActiveQuestion(question)">GO TO QUESTION</buttonn>
+                        <button ng-click="removeQuestion($index)">Remove YOUR QUESTION </button>
+                </li>
+            </ul>-->
+
+        </div>
+    </div>
+</section>

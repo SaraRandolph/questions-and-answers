@@ -1,0 +1,138 @@
+
+<section class="container-fluid center">
+    <div class="col-sm-10 row">
+        <div class="panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-1 text-center icon-box">
+                        <div ng-model="newVote" ng-click="upVote(question)" class="fa fa-chevron-up fa-3x"></div>
+                        <br>
+                        <i class="fa fa-circle"></i>
+                        <br>
+                        <div ng-model="newVote" ng-click="downVote(question)" class="fa fa-chevron-down fa-3x"></div>
+                        <p>Total Votes: {{question.votes}}</p>
+                    </div>
+                    <div class="col-sm-10">
+                        <h3>{{question.questionSummary}}</h3>
+                        <hr>
+                        <p ng-bind-html="question.body"></p>
+                        <hr>
+                        <p>Question Asked: {{question.date | date: 'short'}}</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" ng-click="showTheForm = !showTheForm">Add Response</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row col-sm-7">
+        <form ng-show="showTheForm" ng-submit="addResponse(newResponse)">
+            <div class="form-group">
+                <label for="answer">Answer</label>
+                <input summernote type="text" ng-model="newResponse.body" class="form-control" id="text" placeholder="Write your response here">
+            </div>
+            <button type="submit" ng-model="newResponse" class="btn btn-default">Respond</button>
+            <button type="button" class="btn btn-default" ng-click="showTheForm = false">Cancel</button>
+        </form>
+    </div>
+</section>
+ 
+ 
+
+<section ng-if="question.responses.body">
+    <div class="col-sm-8">
+    <div class="panel panel-default" ng-repeat="response in question.responses">
+        <div class="panel-body">
+            <div class="row">
+                <div>
+                    <div class="col-sm-1 text-center icon-box">
+                        <div ng-model="newVote" ng-click="upVote(question)" class="fa fa-chevron-up fa-2x"></div>
+                        <br>
+                        <i class="fa fa-circle"></i>
+                        <br>
+                        <div ng-model="newVote" ng-click="downVote(question)" class="fa fa-chevron-down fa-2x"></div>
+                        <p>Total Votes: {{question.votes}}</p>
+                    </div>
+                    <div class="col-sm-10" >
+                            <!--<h4 ng-bind-html="response.body"></h4>-->
+                            {{response}}
+                            <!--<p>{{response.userName}}: {{response.date | date: 'short'}}</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+    
+
+
+
+ <!--ACTIVE QUESTION VIEW
+            <section class="responses-container" ng-show="activeQuestion">
+                <div class="col-sm-12">
+                    <div class="response-header">
+                        <h1 ng-click="goBack()">GO BACK</h1>
+                        <!--activeQuestion=''-->
+                        <!--<h2>The Active Question is {{activeQuestion.body}}</h2>
+                    </div>
+                    <div class="responses-list">
+                        <ul>
+
+                            <li ng-repeat="response in activeQuestion.responses">{{response.body}}
+                                <label>
+                                    <input type="checkbox" ng-model="response.solution.value">Solution</label>
+
+                                <li ng-repeat="response in activeQuestion.responses">
+                                    <div ng-click="upVote(response)" class="glyphicon glyphicon-hand-up"> </div>
+                                    <div ng-click="downVote(response)" class="glyphicon glyphicon-hand-down"> </div>
+                                    <p>Total Votes: {{response.votes}}</p>
+                                    <p>{{response.body}}</p>
+
+
+
+                                    <div class="comments-list">
+                                        <ul>
+                                            <li ng-repeat="comment in response.comments track by $index">
+
+                                                <div ng-click="upVote(comment)" class="glyphicon glyphicon-hand-up"></div>
+                                                <div ng-click="downVote(comment)" class="glyphicon glyphicon-hand-down"> </div>
+                                                <p>Total Votes: {{comment.votes}}</p>
+                                                <p>{{comment.body}}</p>
+                                            </li>-->
+                                            <!--<span ng-click="setActiveReponse(response)"></span></li>-->
+                                        <!--</ul>
+
+                                        <input type="text" name="input" ng-model="response.newComment.body" placeholder="Enter new comment">
+                                        <button ng-click="addComment(response)">Add Comment </button>
+                                    </div>
+                                </li>
+
+                        </ul>
+                        <input type="text" name="input" ng-model="newResponse.body" placeholder="Enter new response">
+                        <button ng-click="addResponse()">Add Response </button>
+                    </div>-->
+
+                    <!--<input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
+                          <button ng-click="addComment()">Add Comment </button>  -->
+                <!--</div>
+        </div>
+        </section>
+
+        <section class="comments-container" ng-show="activeResponse">
+            <div class="col-sm-12">
+                <div class="comments-header">-->
+                    <!--<h1 ng-click="activeQuestion = ''">GO BACK</h1>
+                        <h2>The Active Question is {{activeQuestion}}</h2>-->
+                    <!--<h2>The Active Response is {{activeResponse}}</h2>-->
+
+                    <!--<h2 ng-bind="dummy"></h2>-->
+                <!--</div>
+
+            </div>
+        </section>
+
+    </div>
+    </div>-->

@@ -1,0 +1,18 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+
+
+            <form ng-submit="createQuestion(newQuestion)">
+                <input class="form-control" type="text" ng-model="newQuestion.questionSummary"
+                placeholder="Enter short description of your question">
+
+                <input class="form-control" type="text"  ng-model="newQuestion.tag"  placeholder="ie. Javascript, food, ...one word to categorize your queston">
+
+                <div summernote ng-model="newQuestion.body" placeholder="Enter your Question. Please be as specific as possible"></div>
+                <button class="btn btn-primary" type="submit">Add Question </button>
+            </form>
+                <button class="btn btn-primary" ng-click="goHome()">View Questions</button>
+        </div>
+    </div>
+</section>

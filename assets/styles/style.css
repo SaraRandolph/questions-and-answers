@@ -1,0 +1,42 @@
+/*home.html*/
+.panel{
+    border: 1px solid black;
+    background-color:#E5E8EA
+}
+
+.icon-box{
+    margin-top: 10px;
+}
+
+.panel-heading-custom{
+    font-size:2.5em;
+    font-weight: bolder;
+}
+
+.navbar-custom{
+    background-color:#32C7B6;
+    color:#3F5361
+}
+
+.navbar-custom a{
+    color:white
+}
+
+.nav > li > a:hover{
+   background-color: #FA2A26;
+}
+
+.btn-dark-blue{
+    color:white;
+    background-color:#3F5361
+}
+
+.btn-salmon{
+    color:white;
+    background-color:#CE7867;
+}
+
+.btn-red{
+    color:white;
+    background-color:#FA2A26;
+}

@@ -1,17 +1,15 @@
-<html ng-app="Name">
+<html ng-app="SaraStackUnderflow">
 
 <head>
     <meta charset="UTF-8">
     <title>QuestionsAndAnswers</title>
 
     <!--Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-    crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-    crossorigin="anonymous">
-
+    <link rel="stylesheet" href="assets/components/bootstrap/dist/css/bootstrap.css">
     <!--Font Awesome-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/components/font-awesome/css/font-awesome.min.css">
+    <!--Summernote-->
+   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
 
     <!--Our Style-->
     <link rel="stylesheet" href="assets/styles/style.css">
@@ -19,146 +17,98 @@
 </head>
 
 
-<body ng-controller="MainController as mc">
-    <div class="container">
-        <div class="row">
-            
-            <form ng-submit="submitForm()" ng-show="!member">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" ng-model="mc.user.email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" ng-model="mc.user.password">
-                </div>
-                <div class="button-group">
-                    <button type="submit" ng-click="submitForm = login">Login</button>
-                    <button type="submit" ng-click="submitForm = register">Register</button>
-                </div>
-            </form>
-            <section class="question-container" ng-show="!activeQuestion && member" >
-                <div class="col-sm-12">
-                    <div>
-                        <input type="text" ng-model="query" />
-                        <button class="btn-group" role="group" ng-click="sortOrder = 'tag'">Sort by Tag</button>
-                        <button class="btn-group" role="group" ng-click="sortOrder = 'userName'">Sort by User</button>
-                        <button class="btn-group" role="group" ng-click="sortOrder = '-date'">Sort by Date</button>
-                    </div>
-                    <div class="question-header">
-                        <h2 class="fa">Questions</h2>
-                    </div>
-                    <div class="question-list">
-                        <ul>
-                            <li ng-repeat="question in questionsArr | filter: query | orderBy: sortOrder track by $index">
-                                <div ng-click="upVote(question)" class="glyphicon glyphicon-hand-up"></div>
-                                <div ng-click="downVote(question)" class="glyphicon glyphicon-hand-down"></div>
-                                <p>Total Votes: {{question.votes}}</p>
-                                <h3>{{question.questionSummary}}</h3>
-                                <p>{{question.tag}}</p>
-                                <p>{{question.userName}} : {{question.date | date: 'short'}}</p>
-                                <br>
-                                <button ng-click="setActiveQuestion(question)">GO TO QUESTION</buttonn>
-                                    <button ng-click="removeQuestion($index)">Remove YOUR QUESTION </button>
-                            </li>
-                        </ul>
-                        <input class="form-control" type="text" name="questionSummary" ng-model="newQuestion.questionSummary" style:="width: 300px"
-                        placeholder="Enter short description of your question">
-                        <input class="form-control" type="text" name="userName" ng-model="newQuestion.userName" size="width: 100px" placeholder="Enter your User Name">
-                        <input class="form-control" type="text" name="tag" ng-model="newQuestion.tag" size="width: 50px" placeholder="ie. Javascript, food, ...one word to categorize your queston">
-                        <textarea row="5" class="form-control" type="text" name="Question" ng-model="newQuestion.body" placeholder="Enter your Question (long version)"></textarea>
-                        <button ng-click="addQuestion()">Add Question </button>
-                    </div>
-                </div>
-            </section>
-
-
-            <!--ACTIVE QUESTION VIEW-->
-            <section class="responses-container" ng-show="activeQuestion">
-                <div class="col-sm-12">
-                    <div class="response-header">
-                        <h1 ng-click="goBack()">GO BACK</h1>
-                        <!--activeQuestion=''-->
-                        <h2>The Active Question is {{activeQuestion.body}}</h2>
-                    </div>
-                    <div class="responses-list">
-                        <ul>
-
-                            <li ng-repeat="response in activeQuestion.responses">{{response.body}}
-                                <label>
-                                    <input type="checkbox" ng-model="response.solution.value">Solution</label>
-
-                                <li ng-repeat="response in activeQuestion.responses">
-                                    <div ng-click="upVote(response)" class="glyphicon glyphicon-hand-up"> </div>
-                                    <div ng-click="downVote(response)" class="glyphicon glyphicon-hand-down"> </div>
-                                    <p>Total Votes: {{response.votes}}</p>
-                                    <p>{{response.body}}</p>
-
-
-
-                                    <div class="comments-list">
-                                        <ul>
-                                            <li ng-repeat="comment in response.comments track by $index">
-
-                                                <div ng-click="upVote(comment)" class="glyphicon glyphicon-hand-up"></div>
-                                                <div ng-click="downVote(comment)" class="glyphicon glyphicon-hand-down"> </div>
-                                                <p>Total Votes: {{comment.votes}}</p>
-                                                <p>{{comment.body}}</p>
-                                            </li>
-                                            <!--<span ng-click="setActiveReponse(response)"></span></li>-->
-                                        </ul>
-
-                                        <input type="text" name="input" ng-model="response.newComment.body" placeholder="Enter new comment">
-                                        <button ng-click="addComment(response)">Add Comment </button>
-                                    </div>
+<body ng-controller="AuthController">
+    
+    <div ng-if="member">
+        <div class="">
+            <div class="font clearfix back-color">
+                <nav class="navbar navbar-custom row">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar font-color-red"></span>
+                                <span class="icon-bar font-color-red"></span>
+                                <span class="icon-bar font-color-red"></span>
+                            </button>
+                            <a class="navbar-brand navbar-kitchen-manager">Stack UnderFlow</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="#/ask-question" class="font-color">Ask a Question</a></li>
+                                <li><a href="#/profile" class="font-color">Profile</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#/login" ng-click="logout()" ng-click="showDropDown = false" style="cursor: pointer"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
                                 </li>
-
-                        </ul>
-                        <input type="text" name="input" ng-model="newResponse.body" placeholder="Enter new response">
-                        <button ng-click="addResponse()">Add Response </button>
+                            </ul>
+                        </div>
                     </div>
-
-                    <!--<input type="text" name="input" ng-model="newComment" placeholder = "Enter new comment">
-                          <button ng-click="addComment()">Add Comment </button>  -->
-                </div>
-        </div>
-        </section>
-
-        <section class="comments-container" ng-show="activeResponse">
-            <div class="col-sm-12">
-                <div class="comments-header">
-                    <!--<h1 ng-click="activeQuestion = ''">GO BACK</h1>
-                        <h2>The Active Question is {{activeQuestion}}</h2>-->
-                    <h2>The Active Response is {{activeResponse}}</h2>
-
-                    <!--<h2 ng-bind="dummy"></h2>-->
-                </div>
-
+                </nav>
+                <ui-view></ui-view>
             </div>
-        </section>
-
+        </div>
     </div>
+    <!--end member view-->
+
+    <!--Start nonmember view-->
+    <div ng-if="!member">
+        <div class="container-fluid row font">
+            <nav class="navbar navbar-default acc-color-dark-blue font-color-red row">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand navbar-kitchen-manager">Stack Underflow</a>
+                    </div>
+                </div>
+            </nav>
+            <ui-view></ui-view>
+        </div>
     </div>
-
-
-    <!--Angular-->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+           
 
     <!--JQuery-->
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/components/jquery/dist/jquery.js"></script>
+
+    <!--Angular-->
+    <script src="assets/components/angular/angular.js"></script>
+    
+    <!--Load ui-router--->
+    <script src="assets/components/angular-ui-router/release/angular-ui-router.js"></script>
 
     <!--Bootstrap-->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-    crossorigin="anonymous"></script>
+    <script src="assets/components/bootstrap/dist/js/bootstrap.js"></script>
 
     <!--LOAD FIREBASE-->
-    <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+    <script src="assets/components/firebase/firebase.js"></script>
+    
+    <!--Load angular fire-->
+    <script src="assets/components/angularfire/dist/angularfire.js"></script>
+    
+    <!--Load ui bootstrap-->
+    <script src="assets/components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    
+    <!--load summernote-->
+    <script src="assets/components/summernote/dist/summernote.js"></script>
+    <script src="assets/components/angular-summernote/dist/angular-summernote.js"></script>
+    
+    <!--load angular-sanitize-->
+    <script src="assets/components/angular-sanitize/angular-sanitize.js"></script>
+
+    
+    
 
     <!--Our Scripts-->
-    <script src="app/app.js"></script>
-    <script src="app/components/MainController.js"></script>
+    <script src="app/config/init.js"></script>
+    <script src="app/config/routes.js"></script>
+    <script src="app/config/CONSTANTS.js"></script>
+    <script src="app/services/question-service.js"></script>
+    <script src="app/components/views/home/home-controller.js"></script>
+    <script src="app/components/views/login/login-controller.js"></script>
+    <script src="app/components/views/registration/registration-controller.js"></script>
+    <script src="app/components/views/ask-a-question/ask-question-controller.js"></script>
+    <script src="app/components/views/profile/profile-controller.js"></script>
+    <script src="app/components/views/view-question/view-question-controller.js"></script>
 
 </body>
 
